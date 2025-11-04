@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calypso Jeans — Quem Somos</title>
+  <style>
+    :root {
+      --primary-color: #38546f;
+      --secondary-color: #e07b39;
+      --accent-color: #2e86ab;
+      --bg: #f9f9f9;
+      --card-bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: #222; line-height: 1.6; }
+    header { background: var(--primary-color); color: #fff; padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .logo { font-family:'Oswald',sans-serif; font-size: 1.4rem; font-weight: 700; }
+    nav ul { list-style: none; display: flex; gap: 1rem; }
+    nav a { color: #fff; text-decoration: none; font-weight: 600; }
+    nav a:hover { color: var(--secondary-color); }
+    .page-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+
+    h1, h2 { color: var(--primary-color); margin-bottom: 1rem; }
+    h3 { color: var(--secondary-color); margin-bottom: 0.5rem; }
+    p { margin-bottom: 1rem; }
+    
+    .section { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+    .images { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .images img { width: calc(33% - 0.66rem); border-radius: 12px; object-fit: cover; height: 200px; }
+    
+    .testimonials { display: flex; flex-direction: column; gap: 1rem; }
+    .testimonial { background: #f1f1f1; padding: 1rem; border-radius: 8px; font-style: italic; }
+    .testimonial strong { font-style: normal; display: block; margin-top: 0.5rem; color: var(--primary-color); }
+
+    .contact { display: flex; flex-direction: column; gap: 0.5rem; }
+    .contact a { color: var(--accent-color); text-decoration: none; }
+    .contact a:hover { text-decoration: underline; }
+
+    iframe { width: 100%; border: none; border-radius: 12px; height: 300px; }
+
+    @media (max-width: 768px) {
+      .images img { width: calc(50% - 0.5rem); }
+    }
+    @media (max-width: 480px) {
+      .images img { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Calypso Jeans</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quemsomos.html">Quem Somos</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <!-- História da empresa -->
+    <div class="section">
+      <h1>Nossa História</h1>
+      <p>A Calypso Jeans nasceu em 2015, no coração de uma pequena cidade, com um sonho simples: criar calças que se encaixassem perfeitamente no estilo e na vida das pessoas. Tudo começou em uma oficina modesta, onde a jovem designer Clara costurava suas primeiras peças à mão, testando tecidos, cortes e cores. Cada calça tinha personalidade e atenção aos detalhes — e logo conquistou amigos, vizinhos e familiares.</p>
+      <p>Hoje, a Calypso Jeans combina tradição artesanal e tecnologia, criando modelos exclusivos para todos os estilos e ocasiões.</p>
+    </div>
+
+    <!-- Missão e Valores -->
+    <div class="section">
+      <h2>Missão e Valores</h2>
+      <p><strong>Missão:</strong> Transformar o jeans em mais do que uma peça de roupa. Cada calça é uma experiência de conforto, estilo e confiança.</p>
+      <p><strong>Valores:</strong></p>
+      <ul>
+        <li>Qualidade acima de tudo</li>
+        <li>Estilo para todos</li>
+        <li>Sustentabilidade em cada processo</li>
+        <li>Conexão com o cliente</li>
+      </ul>
+    </div>
+
+    <!-- Imagens da empresa -->
+    <div class="section">
+      <h2>Nosso Espaço</h2>
+      <div class="images">
+        <img src="img/loja.jpg" alt="Loja Calypso">
+        <img src="img/eq.jpg" alt="Equipe Calypso Jeans">
+        <img src="img/CALÇAS.jpg" alt="Calças na prateleira">
+        
+      </div>
+    </div>
+
+    <!-- Depoimentos -->
+    <div class="section">
+      <h2>Depoimentos de Clientes</h2>
+      <div class="testimonials">
+        <div class="testimonial">“Nunca encontrei jeans tão confortáveis e que caíssem tão bem. Me sinto confiante toda vez que visto Calypso!”<strong>— Juliana, 28 anos</strong></div>
+        <div class="testimonial">“A qualidade é impecável! Minhas calças ainda parecem novas mesmo depois de várias lavagens.”<strong>— Renata, 35 anos</strong></div>
+        <div class="testimonial">“Adoro como cada modelo tem personalidade. É impossível não se apaixonar.”<strong>— Marina, 22 anos</strong></div>
+      </div>
+    </div>
+
+    <!-- Localização e Contato -->
+    <div class="section">
+      <h2>Localização & Contato</h2>
+      <div class="contact">
+        <p>Av. Central, 123, Vila Mariana, Brasil</p>
+        <p>Email: <a href="mailto:contato@calypsojeans.com">contato@calypsojeans.com</a></p>
+        <p>Telefone: <a href="tel:+5511999999999">+55 11 99999-9999</a></p>
+      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.123456!2d-46.625!3d-23.555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce!2sCalypso%20Jeans!5e0!3m2!1spt-BR!2sbr!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "reservas": [
+    {
+      "nome": "Bob",
+      "alergico": "não",
+      "id": "1"
+    },
+    {
+      "id": "2c36",
+      "nome": "ewqe",
+      "alergico": "Alérgico"
+    },
+    {
+      "id": "0664",
+      "nome": "Ana",
+      "alergico": "Alérgico"
+    },
+    {
+      "id": "6fa3",
+      "nome": "Gabrielly",
+      "alergico": "Não"
+    }
+  ],
+  "pessoas": [
+    {
+      "nome": "Tester",
+      "idade": "25",
+      "email": "teste@restaurante.com",
+      "id": "1"
+    },
+    {
+      "id": "6551",
+      "nome": "ton",
+      "idade": "12",
+      "email": "e@gmail",
+      "senha": "1234"
+    },
+    {
+      "id": "46a2",
+      "nome": "Ana",
+      "idade": "23",
+      "email": "ferreiracibeleeloi@gmail.com",
+      "senha": "1212"
+    },
+    {
+      "id": "9307",
+      "nome": "cici",
+      "idade": "11",
+      "email": "gaby.santana@gmail.com",
+      "senha": "12121"
+    },
+    {
+      "id": "1b6d",
+      "nome": "ana elói",
+      "idade": "46",
+      "email": "Ana.lisboa@gmail.com",
+      "senha": "1234"
+    },
+    {
+      "id": "da94",
+      "nome": "cici elói",
+      "idade": "12",
+      "email": "cici@gmail.com",
+      "senha": "1212"
+    },
+    {
+      "id": "ff24",
+      "nome": "Julio",
+      "idade": "22",
+      "email": "julio@gmail.com",
+      "senha": "1313"
+    }
+  ],
+  "produtos": [
+    {
+      "nome": "Calça Skinny",
+      "descricao": "Lavagem tradicional",
+      "preco": 211,
+      "quantidade": 14,
+      "categoria": "skinny",
+      "numeracao": "40",
+      "imagem": "https://i.pinimg.com/736x/f2/b0/c4/f2b0c45cee7716025e6699121459be4c.jpg",
+      "disponivel": false,
+      "id": "fcf7"
+    },
+    {
+      "nome": "Calça Mom",
+      "descricao": "Lavagem tradicional",
+      "preco": 360,
+      "quantidade": 60,
+      "categoria": "mom",
+      "numeracao": "44",
+      "imagem": "https://i.pinimg.com/736x/cf/5d/80/cf5d808d0b454ed319f0bfd8dc0e2c95.jpg",
+      "disponivel": true,
+      "id": "e9da"
+    },
+    {
+      "id": "b4c9",
+      "nome": "Calça Reta",
+      "descricao": "cor preta",
+      "preco": 280,
+      "quantidade": 30,
+      "categoria": "reta",
+      "numeracao": "42",
+      "imagem": "",
+      "disponivel": true
+    }
+  ]
+}

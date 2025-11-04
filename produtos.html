@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calypso Jeans — Gerenciar Produtos</title>
+
+  <style>
+    :root{
+      --primary-color: #38546f;
+      --secondary-color: #e07b39;
+      --accent-color: #2e86ab;
+      --bg: #f9f9f9;
+      --card-bg: #ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family: 'Montserrat', sans-serif;background:var(--bg);color:#222;min-height:100vh;}
+    header{background:var(--primary-color);color:#fff;padding:0.9rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .logo{font-family:'Oswald',sans-serif;font-size:1.4rem;font-weight:700}
+    nav ul{list-style:none;display:flex;gap:1rem;align-items:center}
+    nav a{color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--secondary-color)}
+    .page-container{max-width:1200px;margin:1.25rem auto;padding:0 1rem}
+
+    .top {
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:1.25rem;
+      align-items:start;
+    }
+
+    /* form */
+    .card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    }
+    .card h2{margin-bottom:0.75rem;color:var(--primary-color)}
+    label{display:block;font-weight:600;margin-top:0.5rem;font-size:0.9rem}
+    input[type="text"], input[type="number"], input[type="url"], textarea, select {
+      width:100%;
+      padding:0.6rem;
+      margin-top:0.35rem;
+      border:1px solid #ddd;border-radius:8px;
+      font-size:0.95rem;
+      background:#fff;
+    }
+    textarea{min-height:90px;resize:vertical}
+    .row{display:flex;gap:0.5rem}
+    .row .col{flex:1}
+    .actions{display:flex;gap:0.5rem;margin-top:0.75rem}
+    .btn{padding:0.6rem 0.9rem;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--secondary-color);color:#fff}
+    .btn-sec{background:var(--primary-color);color:#fff}
+    .btn-danger{background:#c0392b;color:#fff}
+    .small-muted{font-size:0.85rem;color:#666;margin-top:0.5rem}
+
+    /* products list */
+    .list-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem}
+    .product-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:1rem;
+    }
+    .product-card{
+      background:var(--card-bg);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      display:flex;
+      flex-direction:column;
+    }
+    .product-card img{width:100%;height:200px;object-fit:cover}
+    .product-body{padding:0.8rem;flex:1;display:flex;flex-direction:column;gap:0.4rem}
+    .product-body h3{font-size:1.05rem;margin-bottom:0}
+    .meta{font-size:0.9rem;color:#444}
+    .price{margin-top:auto;font-weight:800;color:var(--accent-color)}
+    .product-actions{display:flex;gap:0.5rem;padding:0.8rem;border-top:1px solid #eee;background:#fafafa}
+
+    /* feedback */
+    .msg{padding:0.6rem;border-radius:8px;margin-bottom:0.6rem}
+    .msg.success{background:#e6fbf1;color:#065f46;border:1px solid #d1f7df}
+    .msg.error{background:#fff1f0;color:#7a1f1f;border:1px solid #ffd7d7}
+
+    /* responsive */
+    @media (max-width:1000px){
+      .top{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      header{padding:0.7rem}
+      .product-card img{height:150px}
+    }
+
+    footer {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 2rem 1rem 1rem 1rem;
+  margin-top:2rem;
+  font-size: 0.9rem;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-logo h3 { margin-bottom: 0.5rem; }
+.footer-links ul { list-style: none; padding:0; }
+.footer-links ul li { margin-bottom: 0.5rem; }
+.footer-links ul li a { color: #fff; text-decoration:none; transition: 0.3s; }
+.footer-links ul li a:hover { color: var(--secondary-color); }
+
+.footer-contact p { margin-bottom:0.3rem; }
+.footer-social a { color:#fff; text-decoration:none; transition:0.3s; }
+.footer-social a:hover { color: var(--secondary-color); }
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding-top: 0.8rem;
+  margin-top:1rem;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Calypso Jeans</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quemsomos.html">Quem Somos</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <div class="top">
+      <!-- Formulário de criação/edição -->
+      <div class="card">
+        <h2 id="formTitle">Adicionar Produto</h2>
+
+        <div id="feedback"></div>
+
+        <form id="productForm">
+          <label>Nome</label>
+          <input type="text" id="nome" placeholder="Ex: Calça Skinny Azul" required>
+
+          <label>Descrição</label>
+          <textarea id="descricao" placeholder="Descrição detalhada..."></textarea>
+
+          <div class="row">
+            <div class="col">
+              <label>Preço (R$)</label>
+              <input type="number" id="preco" step="0.01" placeholder="199.90" min="0" required>
+            </div>
+            <div class="col">
+              <label>Quantidade</label>
+              <input type="number" id="quantidade" placeholder="10" min="0" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label>Categoria</label>
+              <select id="categoria">
+                <option value="">Selecione</option>
+                <option value="skinny">Skinny</option>
+                <option value="reta">Reta</option>
+                <option value="wide-leg">Wide Leg</option>
+                <option value="mom">Mom</option>
+              </select>
+            </div>
+            <div class="col">
+              <label>Até á Numeração:</label>
+              <select id="numeracao">
+                <option value="">Selecione</option>
+                <option value="36">36</option>
+                <option value="38">38</option>
+                <option value="40">40</option>
+                <option value="42">42</option>
+                <option value="44">44</option>
+              </select>
+            </div>
+          </div>
+
+          <label>Imagem (URL)</label>
+          <input type="url" id="imagem" placeholder="https://...">
+
+          <label style="margin-top:0.5rem">Disponibilidade</label>
+          <select id="disponivel">
+            <option value="true">Disponível</option>
+            <option value="false">Indisponível</option>
+          </select>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit" id="saveBtn">Adicionar</button>
+            <button class="btn btn-sec" type="button" id="cancelBtn" style="display:none">Cancelar</button>
+          </div>
+
+          <p class="small-muted">Campos obrigatórios: Nome, Preço, Quantidade.</p>
+        </form>
+      </div>
+
+      <!-- Lista de produtos -->
+      <div>
+        <div class="card">
+          <div class="list-header">
+            <h2>Produtos</h2>
+            <div>
+              <input type="text" id="search" placeholder="Buscar por nome..." style="padding:0.5rem;border-radius:8px;border:1px solid #ddd">
+            </div>
+          </div>
+
+          <div id="productsList" class="product-grid">
+            <!-- cards de produtos injetados por JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <h3>Calypso Jeans</h3>
+      <p>Conforto e estilo em cada ponto.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Links Rápidos</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="produtos.html">Produtos</a></li>
+        <li><a href="quemsomos.html">Quem Somos</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Contato</h4>
+      <p>Email: contato@calypsojeans.com</p>
+      <p>Telefone: (11) 99999-9999</p>
+      <p>Mogi das Cruzes - SP</p>
+    </div>
+    <div class="footer-social">
+      <h4>Siga-nos</h4>
+      <a href="#">Instagram</a> | 
+      <a href="#">Facebook</a> | 
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Calypso Jeans. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+  <script>
+    // Protege a página (apenas usuários logados)
+    if(!localStorage.getItem('usuarioLogado')){
+      alert('Você precisa fazer login para acessar esta página.');
+      window.location.href = 'login.html';
+    }
+
+    const apiBase = 'http://localhost:3000/produtos';
+    const form = document.getElementById('productForm');
+    const feedback = document.getElementById('feedback');
+    const productsList = document.getElementById('productsList');
+    const searchInput = document.getElementById('search');
+    const saveBtn = document.getElementById('saveBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const formTitle = document.getElementById('formTitle');
+
+    let editingId = null;
+    let productsCache = [];
+
+    function loadProducts(){
+      fetch(apiBase)
+        .then(r => r.json())
+        .then(data => {
+          productsCache = Array.isArray(data) ? data : [];
+          renderProducts(productsCache);
+        })
+        .catch(err => showMessage('Erro ao carregar produtos. Verifique o servidor.', 'error'));
+    }
+
+    function renderProducts(list){
+      productsList.innerHTML = '';
+      if(list.length === 0){
+        productsList.innerHTML = '<p class="small-muted" style="padding:1rem">Nenhum produto cadastrado.</p>';
+        return;
+      }
+      list.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img src="${p.imagem ? escapeHtml(p.imagem) : 'https://via.placeholder.com/600x400?text=Sem+imagem'}" alt="${escapeHtml(p.nome)}">
+          <div class="product-body">
+            <h3>${escapeHtml(p.nome)}</h3>
+            <div class="meta">${escapeHtml(p.categoria || '—')} • ${escapeHtml(p.descricao ? p.descricao.substring(0,80) + (p.descricao.length>80 ? '...' : '') : '')}</div>
+            <div class="meta">Qtd: ${p.quantidade ?? 0} • Até á Numeração: ${p.numeracao ?? '—'}</div>
+            <div class="price">R$ ${Number(p.preco ?? 0).toFixed(2)}</div>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-sec" onclick="startEdit('${p.id ?? p._id ?? ''}')">Editar</button>
+            <button class="btn btn-danger" onclick="deleteProduct('${p.id ?? p._id ?? ''}')">Excluir</button>
+          </div>
+        `;
+        productsList.appendChild(card);
+      });
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      saveProduct();
+    });
+
+    cancelBtn.addEventListener('click', resetForm);
+
+    function saveProduct(){
+      clearMessage();
+      const nome = document.getElementById('nome').value.trim();
+      const descricao = document.getElementById('descricao').value.trim();
+      const preco = parseFloat(document.getElementById('preco').value);
+      const quantidade = parseInt(document.getElementById('quantidade').value);
+      const categoria = document.getElementById('categoria').value;
+      const numeracao = document.getElementById('numeracao').value;
+      const imagem = document.getElementById('imagem').value.trim();
+      const disponivel = document.getElementById('disponivel').value === 'true';
+
+      if(!nome || isNaN(preco) || isNaN(quantidade)){
+        showMessage('Preencha corretamente: nome, preço e quantidade são obrigatórios.', 'error');
+        return;
+      }
+
+      const payload = { nome, descricao, preco, quantidade, categoria, numeracao, imagem, disponivel };
+
+      if(editingId){
+        fetch(apiBase + '/' + editingId, {
+          method:'PUT',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        })
+        .then(r => {
+          if(!r.ok) throw new Error('Falha ao atualizar');
+          return r.json();
+        })
+        .then(() => {
+          showMessage('Produto atualizado com sucesso.', 'success');
+          resetForm();
+          loadProducts();
+        })
+        .catch(() => showMessage('Erro ao atualizar produto.', 'error'));
+      } else {
+        fetch(apiBase, {
+          method:'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        })
+        .then(r => {
+          if(!r.ok) throw new Error('Falha ao criar');
+          return r.json();
+        })
+        .then(() => {
+          showMessage('Produto criado com sucesso.', 'success');
+          resetForm();
+          loadProducts();
+        })
+        .catch(() => showMessage('Erro ao criar produto.', 'error'));
+      }
+    }
+
+    function startEdit(id){
+      clearMessage();
+      const p = productsCache.find(x => String(x.id) === String(id) || String(x._id) === String(id));
+      if(!p){ showMessage('Produto não encontrado.', 'error'); return; }
+      editingId = id;
+      formTitle.textContent = 'Editar Produto';
+      saveBtn.textContent = 'Salvar';
+      cancelBtn.style.display = 'inline-block';
+
+      document.getElementById('nome').value = p.nome || '';
+      document.getElementById('descricao').value = p.descricao || '';
+      document.getElementById('preco').value = p.preco ?? '';
+      document.getElementById('quantidade').value = p.quantidade ?? '';
+      document.getElementById('categoria').value = p.categoria ?? '';
+      document.getElementById('numeracao').value = p.numeracao ?? '';
+      document.getElementById('imagem').value = p.imagem || '';
+      document.getElementById('disponivel').value = p.disponivel ? 'true' : 'false';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function deleteProduct(id){
+      if(!confirm('Confirma excluir este produto?')) return;
+      fetch(apiBase + '/' + id, { method:'DELETE' })
+        .then(r => {
+          if(!r.ok) throw new Error('Falha ao excluir');
+          showMessage('Produto excluído.', 'success');
+          loadProducts();
+        })
+        .catch(() => showMessage('Erro ao excluir produto.', 'error'));
+    }
+
+    function resetForm(){
+      editingId = null;
+      formTitle.textContent = 'Adicionar Produto';
+      saveBtn.textContent = 'Adicionar';
+      cancelBtn.style.display = 'none';
+      form.reset();
+      clearMessage();
+    }
+
+    searchInput.addEventListener('input', function(){
+      const q = this.value.trim().toLowerCase();
+      if(!q) renderProducts(productsCache);
+      else renderProducts(productsCache.filter(p => String(p.nome || '').toLowerCase().includes(q)));
+    });
+
+    function showMessage(text, type='success'){
+      feedback.innerHTML = `<div class="msg ${type==='error' ? 'error' : 'success'}">${escapeHtml(text)}</div>`;
+      setTimeout(()=> { feedback.innerHTML = ''; }, 4500);
+    }
+    function clearMessage(){ feedback.innerHTML = ''; }
+
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <style>
+    :root {
+      --primary-color: #1e88e5;
+      --secondary-color: #1565c0;
+      --text-color: #fff;
+      --bg-light: #f4f6f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      background: var(--primary-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--secondary-color);
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .erro {
+      color: red;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Cadastro</h2>
+    <input type="text" id="nome" placeholder="Nome completo" required>
+    <input type="number" id="idade" placeholder="Idade" required>
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="senha" placeholder="Senha" required>
+    <input type="password" id="confsenha" placeholder="Confirmar Senha" required>
+    <button onclick="enviarCadastro()">Cadastrar</button>
+    <p>Já tem conta? <a href="login.html">Faça login</a></p>
+    <p id="erro" class="erro"></p>
+  </div>
+
+  <script>
+
+
+    function enviarCadastro(){
+      let nome = document.getElementById("nome").value.trim();
+      let idade = document.getElementById("idade").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let senha = document.getElementById("senha").value.trim();
+      let confsenha = document.getElementById("confsenha").value.trim();
+      let erro = document.getElementById("erro");
+
+      if(!nome || !idade || !email || !senha || !confsenha){
+        erro.textContent = "Preencha todos os campos!";
+        return;
+      }
+
+      if(senha !== confsenha){
+        erro.textContent = "As senhas não coincidem!";
+        return;
+      }
+
+      fetch("http://localhost:3000/pessoas", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ nome, idade, email, senha })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Cadastro realizado com sucesso!");
+        window.location.href = "login.html";
+      })
+      .catch(err => {
+        erro.textContent = "Erro ao cadastrar usuário!";
+        console.error(err);
+      });
+    }
+  </script>
+</body>
+</html>
